@@ -18,7 +18,7 @@
 
 SkyLens is a native Android camera application built with Kotlin, Jetpack Compose, and CameraX. It focuses on a clean camera workflow, practical manual controls, a built-in capture gallery, and transparent reporting of camera hardware capabilities.
 
-> **Project status — v0.1.2 (early MVP):** this repository contains the Android source code. A release APK is not published yet. The app still needs a successful CI build and real-device validation before it can be considered production-ready.
+> **Project status — v0.1.2 (early MVP):** this repository contains the Android source code. The installable debug APK is published as a prerelease asset when the latest main-branch CI build passes. This is a testing build, not a production-signed Play Store release. Real-device validation is still required.
 
 ### What works in this version
 
@@ -159,7 +159,7 @@ Bug reports are most useful when they include the phone model, Android version, 
 
 SkyLens adalah aplikasi kamera Android native yang dibuat menggunakan Kotlin, Jetpack Compose, dan CameraX. Fokusnya adalah alur kamera yang bersih, kontrol manual yang praktis, galeri hasil foto, serta informasi kemampuan kamera perangkat yang ditampilkan secara transparan.
 
-> **Status proyek — v0.1.2 (MVP tahap awal):** repositori ini berisi source code Android. APK rilis belum diterbitkan. Aplikasi masih membutuhkan build CI yang berhasil dan pengujian langsung di perangkat sebelum dapat dianggap siap produksi.
+> **Status proyek — v0.1.2 (MVP tahap awal):** repositori ini berisi source code Android. APK debug yang dapat dipasang diterbitkan sebagai aset prerelease ketika build CI branch main berhasil. Ini merupakan build pengujian, bukan APK produksi yang ditandatangani untuk Play Store. Pengujian langsung di perangkat tetap diperlukan.
 
 ### Fitur yang sudah tersedia
 
