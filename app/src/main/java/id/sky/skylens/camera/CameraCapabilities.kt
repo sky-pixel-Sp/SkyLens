@@ -36,12 +36,13 @@ object CameraCapabilities {
             val fpsRanges = characteristics.get(CameraCharacteristics.CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES)
                 .orEmpty().toList()
             val highSpeedRanges = streamMap?.highSpeedVideoFpsRanges?.toList().orEmpty()
-            val capabilities = characteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)
-                .orEmpty().toSet()
+            val capabilities = (
+                characteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES) ?: intArrayOf()
+            ).toSet()
             val oisModes = characteristics.get(CameraCharacteristics.LENS_INFO_AVAILABLE_OPTICAL_STABILIZATION)
-                .orEmpty()
+                ?: intArrayOf()
             val stabilizationModes = characteristics.get(CameraCharacteristics.CONTROL_AVAILABLE_VIDEO_STABILIZATION_MODES)
-                .orEmpty()
+                ?: intArrayOf()
 
             CameraCapabilitySummary(
                 cameraId = cameraId,
