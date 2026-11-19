@@ -8,13 +8,13 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
     name: Build and test Android app
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +30,12 @@ jobs:
         with:
           gradle-version: "8.13"
 
+      # Do not request the obsolete SDK package "tools". Modern runners
+      # provide command-line tools; only platform-tools is needed here.
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
       - name: Install Android SDK Platform 36
         run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
@@ -45,10 +49,29 @@ jobs:
       - name: Run Android Lint
         run: gradle --no-daemon lintDebug
 
-      - name: Upload debug APK
+      - name: Upload debug APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: skylens-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 30
+
+      - name: Publish installable debug APK release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v0.1.2
+          name: SkyLens v0.1.2 — Installable Debug APK
+          body: |
+            ## SkyLens v0.1.2
+
+            Installable debug build for testing on Android 10 (API 29) or newer.
+
+            **This is a debug build, not a production-signed Play Store release.**
+            The first launch will request camera permission. Video and Motion Capture are silent in this version.
+
+            English and Bahasa Indonesia are available in the app.
+          draft: false
+          prerelease: true
+          files: app/build/outputs/apk/debug/app-debug.apk
