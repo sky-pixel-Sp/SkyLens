@@ -455,7 +455,11 @@ private fun CameraHome(language: AppLanguage, onLanguageChange: (AppLanguage) ->
             ) {
                 if (mode == CaptureMode.LIVE) StatusPill("LIVE", Cream, Ink)
                 if (mode == CaptureMode.PRO) StatusPill("PRO", Cream, Ink)
-                StatusPill(if (lensFacing == CameraSelector.LENS_FACING_BACK) "REAR" else "FRONT", Color.White.copy(alpha = .18f), Color.White)
+                StatusPill(
+                    if (lensFacing == CameraSelector.LENS_FACING_BACK) tr(language, "REAR", "BELAKANG") else tr(language, "FRONT", "DEPAN"),
+                    Color.White.copy(alpha = .18f),
+                    Color.White
+                )
             }
             Column(
                 modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(14.dp),
